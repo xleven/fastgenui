@@ -1,0 +1,5 @@
+fastapi
+fastui
+instructor
+python-dotenv
+uvicorn
