@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FastGenUI Chat</title>
+  <script src="https://unpkg.com/htmx.org@^1"></script>
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 h-screen flex justify-center items-center">
+  <div class="bg-white shadow-lg rounded-lg w-full max-w-md p-6">
+    <div class="flex flex-col space-y-4" id="chat-container">
+      <div class="bg-gray-200 rounded-lg p-3 self-start max-w-[75%]">
+        Hi, how can I help you today?
+      </div>
+    </div>
+    <form class="flex mt-4" hx-post="/chat" hx-target="#chat-container" hx-swap="beforeend" hx-trigger="submit">
+      <input type="text" name="message" placeholder="Type your message..." class="flex-1 border-gray-300 border rounded-l-lg px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500" required>
+      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-r-lg hover:bg-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-500">Send</button>
+    </form>
+  </div>
+  <script>
+    htmx.on('submit', (event)=>{
+        console.log('Form submitted');
+        event.preventDefault();
+        const messageInput = event.target.querySelector('input[name="message"]');
+        const message = `<div class="bg-blue-500 text-white rounded-lg p-3 self-end max-w-[75%]">${messageInput.value.trim()}</div>`;
+        htmx.find("#chat-container").insertAdjacentHTML('beforeend', message);
+        // scroll to bottom
+        const chatContainer = document.getElementById('chat-container');
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+        messageInput.value = '';
+    })
+  </script>
+</body>
+</html>

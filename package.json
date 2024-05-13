@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "@langchain/core": "^0.1.62",
+    "@langchain/openai": "^0.0.28",
+    "langchain": "^0.1.37",
+    "langsmith": "^0.1.23",
+    "openai": "^4.45.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240502.0",
+    "typescript": "^5.4.5"
+  }
+}

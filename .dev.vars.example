@@ -1,0 +1,5 @@
+OPENAI_API_KEY="gsk_xxx"
+OPENAI_API_BASE="https://api.groq.com/openai/v1"
+LANGCHAIN_API_KEY=ls__xxx
+LANGCHAIN_TRACING_V2=true
+LANGCHAIN_PROJECT=fastgenui
