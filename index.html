@@ -16,6 +16,7 @@
     </div>
     <form class="flex mt-4" hx-post="/chat" hx-target="#chat-container" hx-swap="beforeend" hx-trigger="submit">
       <input type="text" name="message" placeholder="Type your message..." class="flex-1 border-gray-300 border rounded-l-lg px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500" required>
+      <input type="hidden" name="conversationHistory" id="conversationHistory">
       <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-r-lg hover:bg-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-500">Send</button>
     </form>
   </div>
@@ -29,6 +30,8 @@
         // scroll to bottom
         const chatContainer = document.getElementById('chat-container');
         chatContainer.scrollTop = chatContainer.scrollHeight;
+        const conversationHistoryInput = event.target.querySelector('input[name="conversationHistory"]');
+        conversationHistoryInput.value += `\nUser: ${messageInput.value.trim()}`;
         messageInput.value = '';
     })
   </script>
