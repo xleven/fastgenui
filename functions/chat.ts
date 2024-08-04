@@ -4,7 +4,6 @@ import { LangChainTracer } from "langchain/callbacks";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import { ChatOpenAI } from "@langchain/openai";
 
-
 export async function onRequestPost(context) {
   try {
     const tracer = new LangChainTracer(
@@ -26,9 +25,11 @@ export async function onRequestPost(context) {
     );
     const body = await context.request.formData();
     const message = body.get("message");
+    const conversationHistory = body.get("conversationHistory") || "";
+    const updatedConversationHistory = `${conversationHistory}\nUser: ${message}`;
     const resp = await prompt.pipe(llm).invoke(
       {
-        "message": message
+        "message": updatedConversationHistory
       },
       {
         callbacks: [tracer],
